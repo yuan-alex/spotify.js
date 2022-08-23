@@ -1,0 +1,28 @@
+{
+  "name": "@yuan-alex/spotify.js",
+  "version": "0.1.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "build": "esbuild ./src/index.ts --target=es6 --platform=browser --bundle --analyze --outdir=dist",
+    "test": "vitest"
+  },
+  "keywords": [
+    "spotify"
+  ],
+  "author": "Alex Yuan",
+  "license": "MIT",
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
+    "@types/jest": "^28.1.6",
+    "@types/spotify-api": "^0.0.17",
+    "dotenv": "^16.0.1",
+    "esbuild": "^0.15.2",
+    "jest": "^28.1.3",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4",
+    "vitest": "^0.21.1"
+  }
+}
