@@ -32,12 +32,18 @@ export default class SpotifyJS {
     };
     data?: any;
   }): Promise<T> {
-    try {
-      if (this.customAxiosInstance) {
-        return await this.customAxiosInstance(config);
+    if (this.customAxiosInstance) {
+      try {
+        return await this.customAxiosInstance({
+          ...config,
+          headers: {
+            ...config.headers,
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        });
+      } catch (error) {
+        return error;
       }
-    } catch (error) {
-      return error;
     }
     let headers = config.headers;
     if (this.accessToken) {
