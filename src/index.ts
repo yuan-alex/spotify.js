@@ -51,7 +51,9 @@ export default class SpotifyJS {
     }
     try {
       const response = await fetch(
-        `${config.url}?${new URLSearchParams(config.params).toString()}`,
+        `https://api.spotify.com/v1/${config.url}?${new URLSearchParams(
+          config.params
+        ).toString()}`,
         {
           method: config.method,
           headers: config.headers,
