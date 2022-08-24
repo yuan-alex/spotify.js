@@ -8,6 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "skipLibCheck": true,
+    "removeComments": true,
     "outDir": "./dist"
   },
   "include": ["./src/**.ts"]
