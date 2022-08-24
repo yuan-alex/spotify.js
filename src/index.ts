@@ -357,14 +357,16 @@ export default class SpotifyJS {
     limit?: number;
     offset?: number;
   }) {
-    return this._makeApiRequest({
-      method: "GET",
-      url: "me/playlists",
-      params: {
-        limit: options?.limit,
-        offset: options?.offset,
-      },
-    });
+    return this._makeApiRequest<SpotifyApi.ListOfCurrentUsersPlaylistsResponse>(
+      {
+        method: "GET",
+        url: "me/playlists",
+        params: {
+          limit: options?.limit,
+          offset: options?.offset,
+        },
+      }
+    );
   }
 
   // search for items
