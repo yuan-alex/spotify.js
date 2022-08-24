@@ -232,17 +232,53 @@ export default class SpotifyJS {
     });
   }
 
-  public skipToNext() {
+  public skipToNext({ device_id }: { device_id?: string }) {
     return this._makeApiRequest({
-      method: "GET",
+      method: "POST",
       url: "me/player/next",
+      params: { device_id },
     });
   }
 
-  public skipToPrevious() {
+  public skipToPrevious({ device_id }: { device_id?: string }) {
     return this._makeApiRequest({
-      method: "GET",
+      method: "POST",
       url: "me/player/previous",
+      params: { device_id },
+    });
+  }
+
+  public pausePlayback({ device_id }: { device_id?: string }) {
+    return this._makeApiRequest({
+      method: "PUT",
+      url: "me/player/pause",
+      params: { device_id },
+    });
+  }
+
+  public startPlayback({
+    device_id,
+    context_uri,
+    uris,
+    offset,
+    position_ms,
+  }: {
+    device_id?: string;
+    context_uri?: string;
+    uris?: string[];
+    offset: any;
+    position_ms?: number;
+  }) {
+    return this._makeApiRequest({
+      method: "PUT",
+      url: "me/player/play",
+      params: { device_id },
+      data: {
+        context_uri,
+        uris,
+        offset,
+        position_ms,
+      },
     });
   }
 
