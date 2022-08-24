@@ -1,6 +1,6 @@
 {
   "name": "@yuan-alex/spotify.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Yet another JS client for the Spotify API.",
   "author": "Alex Yuan",
   "license": "MIT",
