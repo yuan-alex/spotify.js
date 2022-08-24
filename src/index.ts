@@ -1,3 +1,4 @@
+import axios, { Axios, AxiosInstance } from "axios";
 import { RequestAccessTokenResponse } from "./types";
 
 interface ClientConfig {
@@ -18,7 +19,7 @@ export default class SpotifyJS {
   private refreshToken?: string;
   private scope?: string;
   private redirectUri?: string;
-  private customAxiosInstance?: any;
+  private _axiosInstance: AxiosInstance;
   private autoRefreshToken?: boolean;
 
   private async _makeApiRequest<T>(config: {
@@ -32,35 +33,8 @@ export default class SpotifyJS {
     };
     data?: any;
   }): Promise<T> {
-    if (this.customAxiosInstance) {
-      try {
-        return await this.customAxiosInstance({
-          ...config,
-          headers: {
-            ...config.headers,
-            Authorization: `Bearer ${this.accessToken}`,
-          },
-        });
-      } catch (error) {
-        return error;
-      }
-    }
-    let headers = config.headers;
-    if (this.accessToken) {
-      headers["Authorization"] = `Bearer ${this.accessToken}`;
-    }
     try {
-      const response = await fetch(
-        `https://api.spotify.com/v1/${config.url}?${new URLSearchParams(
-          config.params
-        ).toString()}`,
-        {
-          method: config.method,
-          headers: config.headers,
-          body: JSON.stringify(config.data),
-        }
-      );
-      return await response.json();
+      return (await this._axiosInstance(config)).data;
     } catch (error) {
       return error;
     }
@@ -74,11 +48,11 @@ export default class SpotifyJS {
     this.redirectUri = config.redirectUri;
     this.autoRefreshToken = config.autoRefreshToken;
 
-    this.setAccessToken(config.accessToken);
+    this._axiosInstance = config.customAxiosInstance || axios.create();
+    this._axiosInstance.defaults.baseURL = "https://api.spotify.com/v1";
 
-    if (config.customAxiosInstance) {
-      this.customAxiosInstance = config.customAxiosInstance;
-    }
+    // wait until there is an axios instance before setting token
+    this.setAccessToken(config.accessToken);
   }
 
   public getAccessToken() {
@@ -87,7 +61,7 @@ export default class SpotifyJS {
 
   public setAccessToken(token: string) {
     this.accessToken = token;
-    this.customAxiosInstance.defaults.headers[
+    this._axiosInstance.defaults.headers[
       "Authorization"
     ] = `Bearer ${this.accessToken}`;
   }

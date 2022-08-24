@@ -16,7 +16,7 @@ test("generateAuthorizeUrl", () => {
 });
 
 test("getCurrentUserProfile", async () => {
-  expect(await (await client.getCurrentUserProfile()).id).toBeDefined();
+  expect((await client.getCurrentUserProfile()).id).toBeDefined();
 });
 
 test("getCurrentUsersPlaylist", async () => {
