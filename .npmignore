@@ -1,0 +1,10 @@
+# npm ignored files
+
+# don't include source files
+src/
+
+# don't include tool config files
+prettier.config.js
+tsconfig.json
+pnpm-lock.yaml
+.env
