@@ -1,10 +1,11 @@
 import axios, { Axios, AxiosInstance } from "axios";
+
 import { RequestAccessTokenResponse } from "./types";
 
 interface ClientConfig {
   clientId: string;
   clientSecret?: string;
-  accessToken: string;
+  accessToken?: string;
   refreshToken?: string;
   scope?: string;
   redirectUri: string;
@@ -15,7 +16,7 @@ interface ClientConfig {
 export default class SpotifyJS {
   private clientId: string;
   private clientSecret?: string | undefined;
-  private accessToken: string;
+  private accessToken?: string;
   private refreshToken?: string;
   private scope?: string;
   private redirectUri?: string;
