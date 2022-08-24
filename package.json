@@ -16,8 +16,7 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc --build",
-    "test": "vitest",
-    "publish": "pnpm build && pnpm publish"
+    "test": "vitest"
   },
   "dependencies": {
     "axios": "^0.27.2"
